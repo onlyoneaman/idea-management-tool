@@ -188,6 +188,16 @@ const ManagePage = () => {
     setLoad(false)
   }
 
+  function boxDropped(pos: any) {
+    buckets.map((b) => {
+      const a = document.getElementById(`bucket-${b.id}`)
+      if(a) {
+        let [w, h, t, l] = [a.offsetWidth, a.offsetHeight, a.offsetTop, a.offsetLeft]
+        console.log(l, w, t, h)
+      }
+    })
+  }
+
   function refresh() {
     getIdeas()
     getBuckets()
@@ -231,14 +241,18 @@ const ManagePage = () => {
             ))}
           </Radio.Group>
           <Divider />
-          <Button
-              onClick={(e) => addNewItem()}
-              icon={<PlusCircleOutlined />}
-              title={"Add Idea"}
-              className={"is-pulled-right"}
-          >
-            Add Idea
-          </Button>
+          {
+            mode !== 3 && (
+                  <Button
+                      onClick={(e) => addNewItem()}
+                      icon={<PlusCircleOutlined />}
+                      title={"Add Idea"}
+                      className={"is-pulled-right"}
+                  >
+                    Add Idea
+                  </Button>
+              )
+          }
           <Button
               title={"Add Bucket"}
               className={"is-pulled-right"}
@@ -275,12 +289,12 @@ const ManagePage = () => {
                             className={"box bucket-box"}
                             style={{
                             }}
-                            onDragOver={e => {
+/*                            onDragLeaveCapture={e => {
                               e.preventDefault()
                               console.log(e)
-                            }}
+                            }}*/
                             key={b.id}
-                            onDragEnterCapture={e => console.log(e)}
+                            id={`bucket-${b.id}`}
                         >
                           <h3 className={"heading has-text-centered has-text-weight-bold is-size-4"}>
                             {b.title}
@@ -295,10 +309,29 @@ const ManagePage = () => {
                                   removeIdea={removeItem}
                                   buckets={buckets}
                                   mode={mode}
+                                  dropped={boxDropped}
                               />
                           ))}
                         </div>
                     ))}
+                    <div className={"mx-5 px-5"}>
+                      <h3 className={"heading has-text-weight-bold is-size-4"}>
+                        Ungrouped
+                      </h3>
+                      {ideas.filter(i => i.bucket_id === null).map((i) => (
+                          <DraggableCard
+                              item={i}
+                              key={i.id}
+                              updateIdeaPosition={updatePositionItem}
+                              updateIdeaDesc={updateItemDescription}
+                              edit={i.id === newItem}
+                              removeIdea={removeItem}
+                              buckets={buckets}
+                              mode={mode}
+                              dropped={boxDropped}
+                          />
+                      ))}
+                    </div>
                   </div>
               )
             }
@@ -306,23 +339,6 @@ const ManagePage = () => {
         </ContentWrapper>
       </Layout>
   )
-
-/*  return (
-      <div style={style}>
-        <Touch>
-          <Canvas
-              width={800}
-              height={600}
-              onAnimationFrame={(ctx, time) => {
-                ctx.font = '30px Arial'
-                ctx.fillText(`time: ${Math.round(time)}`, 25, 50)
-              }}
-              getContext={(ctx => ctx)}
-          >
-          </Canvas>
-        </Touch>
-      </div>
-  )*/
 }
 
 export default ManagePage

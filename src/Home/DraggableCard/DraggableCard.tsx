@@ -24,7 +24,8 @@ type DraggableCardProps = {
   buckets: Bucket[],
   pro?: any,
   grouped?: boolean,
-  mode: number
+  mode: number,
+  dropped?: Function
 }
 
 const defaultDeltaPositions: DraggableCardProps["deltaPosition"] = {x: 0, y: 0}
@@ -41,7 +42,8 @@ const DraggableCard = (
         buckets,
         pro,
         grouped,
-        mode
+        mode,
+        dropped
     }: DraggableCardProps,
 ) => {
   const [editItem, setEditItem] = useState(false)
@@ -101,6 +103,11 @@ const DraggableCard = (
           left: item.position.x,
           zIndex: 1000
         }}
+        onDragEnd={e => {
+          console.log(e)
+          e.preventDefault()
+        }}
+        draggable
       >
         <Draggable
 /*            handle=".handle"
@@ -108,7 +115,7 @@ const DraggableCard = (
             position={undefined}
             grid={[25, 25]}*/
             scale={1}
-            disabled={editItem}
+            disabled
             key={item.id}
             onDrag={(e, ui) => handleDrag(e, ui)}
             {...dragHandlers}
