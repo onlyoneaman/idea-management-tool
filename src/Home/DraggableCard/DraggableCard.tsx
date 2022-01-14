@@ -107,7 +107,6 @@ const DraggableCard = (
           console.log(e)
           e.preventDefault()
         }}
-        draggable
       >
         <Draggable
 /*            handle=".handle"
@@ -115,7 +114,7 @@ const DraggableCard = (
             position={undefined}
             grid={[25, 25]}*/
             scale={1}
-            disabled
+            disabled={editItem || mode===1}
             key={item.id}
             onDrag={(e, ui) => handleDrag(e, ui)}
             {...dragHandlers}

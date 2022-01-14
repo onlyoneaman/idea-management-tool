@@ -43,7 +43,7 @@ export const Views = [
   }
 ]
 
-const DEFAULT_MODE = 1
+const DEFAULT_MODE = 2
 
 const ManagePage = () => {
   const [ideas, setIdeas] = useState<Idea[]>([])
