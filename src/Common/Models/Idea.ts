@@ -7,7 +7,7 @@ type Idea = {
   },
   id: number,
   color: string,
-  bucketId?: number | null
+  bucket_id?: number | null
 }
 
 export default Idea

@@ -1,6 +1,9 @@
+import Idea from "./Idea";
+
 type Bucket = {
   id: number,
-  title: string
+  title: string,
+  ideas: Idea[]
 }
 
 export default Bucket

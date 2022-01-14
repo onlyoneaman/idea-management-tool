@@ -4,12 +4,14 @@ import './App.css';
 import ErrorBoundary from "./Common/Components/ErrorBoundary";
 import Home from "./Home";
 import './components/all.sass'
+import SEO from "./components/SEO";
 
 function App() {
 
   const WrapperHome = (props: any) => {
     return(
         <ErrorBoundary>
+          <SEO title={"Ideas Mapping"} />
           <Home {...props} />
         </ErrorBoundary>
     )
