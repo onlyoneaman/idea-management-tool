@@ -1,5 +1,5 @@
 export const ApiConstants = {
-  PROD_SERVER_URL: "http://localhost:3000",
+  PROD_SERVER_URL: "https://imtdev.onlyoneaman.com",
   DEV_SERVER_URL: "http://localhost:3000",
   SERVER_NAMESPACE: '/api/v1',
   RUN_PROD_SERVER: true,

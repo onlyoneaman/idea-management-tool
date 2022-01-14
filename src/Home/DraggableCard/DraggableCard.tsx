@@ -23,7 +23,8 @@ type DraggableCardProps = {
   removeIdea: Function,
   buckets: Bucket[],
   pro?: any,
-  grouped: boolean
+  grouped?: boolean,
+  mode: number
 }
 
 const defaultDeltaPositions: DraggableCardProps["deltaPosition"] = {x: 0, y: 0}
@@ -39,7 +40,8 @@ const DraggableCard = (
         removeIdea,
         buckets,
         pro,
-        grouped
+        grouped,
+        mode
     }: DraggableCardProps,
 ) => {
   const [editItem, setEditItem] = useState(false)
@@ -93,7 +95,7 @@ const DraggableCard = (
         onMouseEnter={e => setShowEdit(true)}
         onMouseLeave={e => setShowEdit(false)}
         key={item.id}
-        style={grouped ? {} : {
+        style={mode!==2 ? {} : {
           position: 'absolute',
           top: item.position.y,
           left: item.position.x,

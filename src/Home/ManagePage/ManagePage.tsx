@@ -28,13 +28,17 @@ const cardColors = [
   "#89f3a7", "#f28384"
 ]
 
-const views = [
+export const Views = [
   {
     value: 1,
     title: "Standard"
   },
   {
     value: 2,
+    title: "Sorted"
+  },
+  {
+    value: 3,
     title: "Group Highlights"
   }
 ]
@@ -217,7 +221,7 @@ const ManagePage = () => {
             value={mode}
             onChange={e => setMode(e.target.value)}
           >
-            {views.map((v) => (
+            {Views.map((v) => (
                 <Radio.Button
                   value={v.value}
                   key={v.value}
@@ -248,7 +252,7 @@ const ManagePage = () => {
         >
           <div>
             {
-              mode === 1 ? (
+              mode !== 3 ? (
                   <div>
                     {ideas.map((i) => (
                         <DraggableCard
@@ -260,6 +264,7 @@ const ManagePage = () => {
                             removeIdea={removeItem}
                             buckets={buckets}
                             grouped={false}
+                            mode={mode}
                         />
                     ))}
                   </div>
@@ -289,7 +294,7 @@ const ManagePage = () => {
                                   edit={i.id === newItem}
                                   removeIdea={removeItem}
                                   buckets={buckets}
-                                  grouped={true}
+                                  mode={mode}
                               />
                           ))}
                         </div>
